@@ -34,78 +34,110 @@ background_picture = tk.Label(frame_picture, image = img)
 #The Pack geometry manager packs widgets in rows or columns.
 background_picture.place(x=0, y=0, relwidth=1, relheight=1)
 
+class Building:
+    def __init__(self, name, button):
+        self.name = name
+        self.button = button
+        self.button.configure(highlightbackground = "yellow")
+    def change_color(self, color):
+        self.button.configure(highlightbackground = color)
+
 #bg does'nt work for mac, I use highlightbackgroun instead
-west = tk.Button(text = "West", highlightbackground  = "red")
-west.place(x = 100, y = 55)
+button = tk.Button(text = "West")
+button.place(x = 100, y = 55)
+west = Building("West", button)
 
-walker = tk.Button(text = "Walker", highlightbackground  = "red")
-walker.place(x = 155, y = 167)
+button = tk.Button(text = "Walker")
+button.place(x = 155, y = 167)
+walker = Building("Walker", button)
 
-sage = tk.Button(text = "Sage", highlightbackground  = "red")
-sage.place(x = 265, y = 150)
+button = tk.Button(text = "Sage")
+button.place(x = 265, y = 150)
+sage = Building("Sage", button)
 
-troy = tk.Button(text = "Troy", highlightbackground  = "red")
-troy.place(x = 370, y = 145)
+button = tk.Button(text = "Troy")
+button.place(x = 370, y = 145)
+troy = Building("Troy", button)
 
-richetts = tk.Button(text = "Richetts", highlightbackground  = "red")
-richetts.place(x = 445, y = 155)
+button = tk.Button(text = "Richetts")
+button.place(x = 445, y = 155)
+richetts = Building("Richetts", button)
 
-wrestling = tk.Button(text = "Wrestling", highlightbackground  = "red")
-wrestling.place(x = 535, y = 175)
+button = tk.Button(text = "Wrestling")
+button.place(x = 535, y = 175)
+wrestling = Building("Wrestling", button)
 
-quad = tk.Button(text = "Quad", highlightbackground  = "red")
-quad.place(x = 635, y = 200)
+button = tk.Button(text = "Quad")
+button.place(x = 635, y = 200)
+quad = Building("Quad", button)
 
-pittsburgh = tk.Button(text = "Pittsburgh", highlightbackground  = "red")
-pittsburgh.place(x = 70, y = 130)
+button = tk.Button(text = "Pittsburgh")
+button.place(x = 70, y = 130)
+pittsburgh = Building("Pittsburgh", button)
 
-lally = tk.Button(text = "Lally", highlightbackground  = "red")
-lally.place(x = 230, y = 270)
+button = tk.Button(text = "Lally")
+button.place(x = 230, y = 270)
+lally = Building("Lally", button)
 
-amos = tk.Button(text = "AE", highlightbackground  = "red")
-amos.place(x = 175, y = 260)
+button = tk.Button(text = "AE")
+button.place(x = 175, y = 260)
+ae = Building("AE", button)
 
-greene = tk.Button(text = "Greene", highlightbackground  = "red")
-greene.place(x = 310, y = 280)
+button = tk.Button(text = "Greene")
+button.place(x = 310, y = 280)
+greene = Building("Greene", button)
 
-carnegie = tk.Button(text = "Carnegie", highlightbackground  = "red")
-carnegie.place(x = 100, y = 220)
+button = tk.Button(text = "Carnegie")
+button.place(x = 100, y = 220)
+carnegie = Building("Carnegie", button)
 
-library = tk.Button(text = "Library", highlightbackground  = "red")
-library.place(x = 160, y = 380)
+button = tk.Button(text = "Library")
+button.place(x = 160, y = 380)
+library = Building("Library", button)
 
-vcc = tk.Button(text = "VCC", highlightbackground  = "red")
-vcc.place(x = 255, y = 390)
+button = tk.Button(text = "VCC")
+button.place(x = 255, y = 390)
+vcc = Building("VCC", button)
 
-empac = tk.Button(text = "EMPAC", highlightbackground  = "red")
-empac.place(x = 50, y = 440)
+button = tk.Button(text = "EMPAC")
+button.place(x = 50, y = 440)
+empac = Building("EMPAC", button)
 
-j_rowl = tk.Button(text = "J_ROWL", highlightbackground  = "red")
-j_rowl.place(x = 350, y = 450)
+button = tk.Button(text = "J_ROWL")
+button.place(x = 350, y = 450)
+j_rowl = Building("J_ROWL", button)
 
-cogswell = tk.Button(text = "Cogswell", highlightbackground  = "red")
-cogswell.place(x = 255, y = 550)
+button = tk.Button(text = "Cogswell")
+button.place(x = 255, y = 550)
+cogswell = Building("Cogswell", button)
 
-jec = tk.Button(text = "JEC", highlightbackground  = "red")
-jec.place(x = 390, y = 350)
+button = tk.Button(text = "JEC")
+button.place(x = 390, y = 350)
+jec = Building("JEC", button)
 
-low = tk.Button(text = "LOW", highlightbackground  = "red")
-low.place(x = 520, y = 380)
+button = tk.Button(text = "LOW")
+button.place(x = 520, y = 380)
+low = Building("LOW", button)
 
-union = tk.Button(text = "Union", highlightbackground  = "red")
-union.place(x = 760, y = 300)
+button = tk.Button(text = "UNION")
+button.place(x = 760, y = 300)
+union = Building("UNION", button)
 
-mueller = tk.Button(text = "Mueller Center", highlightbackground  = "red")
-mueller.place(x = 720, y = 500)
+button = tk.Button(text = "Mueller Center")
+button.place(x = 720, y = 500)
+Mueller = Building("Mueller Center", button)
 
-cbis = tk.Button(text = "Center for Biotechnology", highlightbackground  = "red")
-cbis.place(x = 480, y = 520)
+button = tk.Button(text = "Center for Biotechnology")
+button.place(x = 480, y = 520)
+cbis = Building("Center for Biotechnology", button)
 
-ballroom = tk.Button(text = "Ballroom", highlightbackground  = "red")
-ballroom.place(x = 550, y = 640)
+button = tk.Button(text = "Ballroom")
+button.place(x = 550, y = 640)
+ballroom = Building("Ballroom", button)
 
-sage_dining = tk.Button(text = "Sage Dining Hall", highlightbackground  = "red")
-sage_dining.place(x = 550, y = 310)
+button = tk.Button(text = "Sage Dining Hall")
+button.place(x = 550, y = 310)
+sage_dining = Building("Sage Dining Hall", button)
 
 
 if __name__ == "__main__":

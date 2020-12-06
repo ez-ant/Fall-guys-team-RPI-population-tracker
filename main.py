@@ -1,6 +1,8 @@
 import connect_database
 import tkinter as tk
+from tkinter import messagebox
 from PIL import ImageTk, Image
+
 #set window
 window = tk.Tk()
 window.geometry("1000x700")
@@ -39,13 +41,24 @@ class Building:
         self.name = name
         self.button = button
         self.button.configure(highlightbackground = "yellow")
+
     def change_color(self, color):
         self.button.configure(highlightbackground = color)
+        
+def showdata1(name):
+    tk.messagebox.showinfo( "Data Report", "Building: "+str(name)+"\n\nEmergency: red\nPeople in building: 50\nCapacity:100")
+
+def showdata2(name):
+    tk.messagebox.showinfo( "Data Report", "Building: "+str(name)+"\n\nEmergency: green\nPeople in building: 30\nCapacity:500")
+
+def showdata3(name):
+    tk.messagebox.showinfo( "Data Report", "Building: "+str(name)+"\n\nEmergency: yellow\nPeople in building: 35\nCapacity:200")
 
 #bg does'nt work for mac, I use highlightbackgroun instead
-button = tk.Button(text = "West")
+button = tk.Button(text = "West", command = lambda: showdata1("West") )
 button.place(x = 100, y = 55)
 west = Building("West", button)
+west.button.configure(highlightbackground = "red")
 
 button = tk.Button(text = "Walker")
 button.place(x = 155, y = 167)
@@ -58,6 +71,7 @@ sage = Building("Sage", button)
 button = tk.Button(text = "Troy")
 button.place(x = 370, y = 145)
 troy = Building("Troy", button)
+troy.button.configure(highlightbackground = "red")
 
 button = tk.Button(text = "Richetts")
 button.place(x = 445, y = 155)
@@ -70,6 +84,7 @@ wrestling = Building("Wrestling", button)
 button = tk.Button(text = "Quad")
 button.place(x = 635, y = 200)
 quad = Building("Quad", button)
+quad.button.configure(highlightbackground = "red")
 
 button = tk.Button(text = "Pittsburgh")
 button.place(x = 70, y = 130)
@@ -82,6 +97,7 @@ lally = Building("Lally", button)
 button = tk.Button(text = "AE")
 button.place(x = 175, y = 260)
 ae = Building("AE", button)
+ae.button.configure(highlightbackground = "red")
 
 button = tk.Button(text = "Greene")
 button.place(x = 310, y = 280)
@@ -98,10 +114,12 @@ library = Building("Library", button)
 button = tk.Button(text = "VCC")
 button.place(x = 255, y = 390)
 vcc = Building("VCC", button)
+vcc.button.configure(highlightbackground = "green")
 
-button = tk.Button(text = "EMPAC")
+button = tk.Button(text = "EMPAC", command = lambda: showdata2("EMPAC") )
 button.place(x = 50, y = 440)
 empac = Building("EMPAC", button)
+empac.button.configure(highlightbackground = "green")
 
 button = tk.Button(text = "J_ROWL")
 button.place(x = 350, y = 450)
@@ -114,12 +132,14 @@ cogswell = Building("Cogswell", button)
 button = tk.Button(text = "JEC")
 button.place(x = 390, y = 350)
 jec = Building("JEC", button)
+jec.button.configure(highlightbackground = "green")
 
 button = tk.Button(text = "LOW")
 button.place(x = 520, y = 380)
 low = Building("LOW", button)
+low.button.configure(highlightbackground = "green")
 
-button = tk.Button(text = "UNION")
+button = tk.Button(text = "UNION", command = lambda: showdata3("UNION") )
 button.place(x = 760, y = 300)
 union = Building("UNION", button)
 
@@ -130,6 +150,7 @@ Mueller = Building("Mueller Center", button)
 button = tk.Button(text = "Center for Biotechnology")
 button.place(x = 480, y = 520)
 cbis = Building("Center for Biotechnology", button)
+cbis.button.configure(highlightbackground = "green")
 
 button = tk.Button(text = "Ballroom")
 button.place(x = 550, y = 640)

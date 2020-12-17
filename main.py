@@ -148,6 +148,7 @@ def login_verify(access):
     else:
         user_not_found(access)
 def login_success(access):
+    print(access)
     access = "1"
     print(access)
     global login_success_screen
@@ -191,6 +192,7 @@ def delete_wrong_password():
 def delete_user_not_found_screen():
     user_not_found_screen.destroy()
 
+global access
 access = "1" # 0 : user, 1 : admin
 
 tk.Button(master=frame_toolbar,text="Login", height="2", width="30", command=lambda: login(access)).pack() 
@@ -348,7 +350,7 @@ allbuilding = [west, walker, sage, troy, richetts, wrestling, quad,
 allbuilding_name = [i.name for i in allbuilding]
 def update_data():
     print(access)
-    window = tk.Tk() 
+    window = tk.Toplevel(frame_picture)
     window.geometry('350x300') 
     # Label 
     ttk.Label(window, text = "Select the Building :",  
@@ -391,6 +393,8 @@ def update_number(building_choosen, num):
                 print(building.people)
             except ValueError:
                 tk.messagebox.showinfo("Please enter integer")
+    for i in allbuilding:
+        i.auto_color()
             
 
 

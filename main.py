@@ -53,19 +53,13 @@ class Building:
         self.auto_color()
 
     def change_color(self, color):
-<<<<<<< HEAD
         self.button.configure(background = color)#For windows system
         # self.button.configure(highlightbackground = color)#For Mac system
-=======
-        self.button.configure(highlightbackground=color)
-        self.button.configure(bg=color)
->>>>>>> 5140f0f5676510f4f9cc79ba875bde23e5a62ff9
         self.color = color
 
     def auto_color(self):
         self.ratio = float(self.people) / float(self.capacity)
         if self.ratio <= 0.1:
-<<<<<<< HEAD
             self.button.configure(background = "green")#For windows system
             # self.button.configure(highlightbackground = "green")#For Mac system
             self.color = "green"
@@ -76,18 +70,6 @@ class Building:
         else:
             self.button.configure(background = "red")#For windows system
             # self.button.configure(highlightbackground = "red")#For Mac system
-=======
-            self.button.configure(highlightbackground="green")
-            self.button.configure(bg="green")
-            self.color = "green"
-        elif self.ratio > 0.1 and self.ratio <= 0.3:
-            self.button.configure(highlightbackground="yellow")
-            self.button.configure(bg="yellow")
-            self.color = "yellow"
-        else:
-            self.button.configure(highlightbackground="red")
-            self.button.configure(bg="red")
->>>>>>> 5140f0f5676510f4f9cc79ba875bde23e5a62ff9
             self.color = "red"
 
     def add_button(self, button):
@@ -125,7 +107,6 @@ def showdata3(name):
                            "Building: " + str(name) + "\n\nEmergency: yellow\nPeople in building: 35\nCapacity:200")
 
 
-<<<<<<< HEAD
 def login():
     global login_screen
     login_screen = tk.Toplevel(frame_picture)
@@ -142,7 +123,6 @@ def login():
     username_verify = tk.StringVar()
     password_verify = tk.StringVar()
  
-   
     tk.Label(login_screen, text="Username * ").pack()
     username_login_entry = tk.Entry(login_screen, textvariable=username_verify)
     username_login_entry.pack()
@@ -212,11 +192,6 @@ tk.Label(text="").pack()
 #bg does'nt work for mac, I use highlightbackgroun instead
 button = tk.Button(text = "West" )
 button.place(x = 100, y = 55)
-=======
-# bg does'nt work for mac, I use highlightbackgroun instead
-button = tk.Button(text="West")
-button.place(x=100, y=55)
->>>>>>> 5140f0f5676510f4f9cc79ba875bde23e5a62ff9
 west = Building("West", button)
 west.people = 40
 west.auto_color()
@@ -362,9 +337,9 @@ allbuilding = [west, walker, sage, troy, richetts, wrestling, quad,
                empac, j_rowl, cogswell, jec, low, union, Mueller, cbis,
                ballroom, sage_dining]
 
-button = tk.Button(frame_toolbar, text="UPDATE")
-button.place(x=0, y=60)
-button.configure(command=lambda: updateData(allbuilding))
+button = tk.Button(master=frame_toolbar, text="UPDATE", height="2", width="30", command=lambda: updateData(allbuilding)).pack()
+# button.place(x=0, y=60)
+# button.configure(command=lambda: updateData(allbuilding))
 
 def live(allbuilding):
     while 1:

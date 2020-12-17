@@ -1,7 +1,9 @@
 import random
 
+import connect_database
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 from PIL import ImageTk, Image
 import threading
 import time
@@ -185,8 +187,11 @@ def delete_wrong_password():
 def delete_user_not_found_screen():
     user_not_found_screen.destroy()
 
+
+
 tk.Button(master=frame_toolbar,text="Login", height="2", width="30", command=login).pack() 
 tk.Label(text="").pack() 
+
 
 #bg does'nt work for mac, I use highlightbackgroun instead
 button = tk.Button(text = "West" )
@@ -335,25 +340,39 @@ allbuilding = [west, walker, sage, troy, richetts, wrestling, quad,
                pittsburgh, lally, ae, greene, carnegie, library, vcc,
                empac, j_rowl, cogswell, jec, low, union, Mueller, cbis,
                ballroom, sage_dining]
+allbuilding_name = [i.name for i in allbuilding]
+def update_data():
+    window = tk.Tk() 
+    window.geometry('350x250') 
+    # Label 
+    ttk.Label(window, text = "Select the Building :",  
+            font = ("Times New Roman", 10)).grid(column = 0,  
+            row = 15, padx = 10, pady = 25) 
+    
+    n = tk.StringVar() 
+    building_choosen = ttk.Combobox(window, width = 27,  
+                                textvariable = n) 
+    
+    # Adding combobox drop down list 
+    building_choosen['values'] = (allbuilding_name) 
+    
+    building_choosen.grid(column = 1, row = 15) 
+    
+    # Shows february as a default value 
+    building_choosen.current(1)  
+    window.mainloop() 
 
 button = tk.Button(master=frame_toolbar, text="UPDATE", height="2", width="30", command=lambda: updateData(allbuilding)).pack()
+tk.Button(master=frame_toolbar,text="Update Data\n(Admin Only)", height="2", width="30", command=update_data).pack() 
+tk.Label(text="").pack() 
 # button.place(x=0, y=60)
 # button.configure(command=lambda: updateData(allbuilding))
-
-button = tk.Button(master=frame_toolbar, text="SAFEST", height="2", width="30", command=lambda: safest(allbuilding)).pack()
 
 def live(allbuilding):
     while 1:
         updateData(allbuilding)
         time.sleep(200)
         updateData(allbuilding)
-
-def safest(all):
-    safe = all[0]
-    for b in all:
-        if b.ratio < safe.ratio:
-            safe = b
-    tk.messagebox.showinfo("Safest Building", "The building that currently has the least population density:\n\n"+safe.name)
 
 if __name__ == "__main__":
     # restrict the user to resize window

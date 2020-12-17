@@ -32,6 +32,8 @@ path = "rpi_buildings.png"
 image = Image.open(path)
 image = image.resize((820, 700), Image.ANTIALIAS)
 img = ImageTk.PhotoImage(image)
+user_admin = "a"
+user_password = "a"
 
 # The Label widget is a standard Tkinter widget used to display a text or image on the screen.
 background_picture = tk.Label(frame_picture, image=img)
@@ -51,23 +53,23 @@ class Building:
         self.auto_color()
 
     def change_color(self, color):
-        self.button.configure(highlightbackground=color)
-        self.button.configure(bg=color)
+        self.button.configure(background = color)#For windows system
+        # self.button.configure(highlightbackground = color)#For Mac system
         self.color = color
 
     def auto_color(self):
         self.ratio = float(self.people) / float(self.capacity)
         if self.ratio <= 0.1:
-            self.button.configure(highlightbackground="green")
-            self.button.configure(bg="green")
+            self.button.configure(background = "green")#For windows system
+            # self.button.configure(highlightbackground = "green")#For Mac system
             self.color = "green"
         elif self.ratio > 0.1 and self.ratio <= 0.3:
-            self.button.configure(highlightbackground="yellow")
-            self.button.configure(bg="yellow")
+            self.button.configure(background = "yellow")#For windows system
+            # self.button.configure(highlightbackground = "yellow")#For Mac system
             self.color = "yellow"
         else:
-            self.button.configure(highlightbackground="red")
-            self.button.configure(bg="red")
+            self.button.configure(background = "red")#For windows system
+            # self.button.configure(highlightbackground = "red")#For Mac system
             self.color = "red"
 
     def add_button(self, button):
@@ -105,9 +107,91 @@ def showdata3(name):
                            "Building: " + str(name) + "\n\nEmergency: yellow\nPeople in building: 35\nCapacity:200")
 
 
-# bg does'nt work for mac, I use highlightbackgroun instead
-button = tk.Button(text="West")
-button.place(x=100, y=55)
+def login():
+    global login_screen
+    login_screen = tk.Toplevel(frame_picture)
+    login_screen.title("Login")
+    login_screen.geometry("300x250")
+    tk.Label(login_screen, text="Please enter details below to login").pack()
+    tk.Label(login_screen, text="").pack()
+ 
+    global username_verify
+    global password_verify
+    global username_login_entry
+    global password_login_entry
+ 
+    username_verify = tk.StringVar()
+    password_verify = tk.StringVar()
+ 
+    tk.Label(login_screen, text="Username * ").pack()
+    username_login_entry = tk.Entry(login_screen, textvariable=username_verify)
+    username_login_entry.pack()
+    tk.Label(login_screen, text="").pack()
+    tk.Label(login_screen, text="Password * ").pack()
+    password_login_entry = tk.Entry(login_screen, textvariable=password_verify, show= '*')
+    password_login_entry.pack()
+    tk.Label(login_screen, text="").pack()
+    tk.Button(login_screen, text="Login", width=10, height=1, command=login_verify).pack()
+
+def login_verify():
+    username1 = username_verify.get()
+    password1 = password_verify.get()
+    username_login_entry.delete(0, tk.END)
+    password_login_entry.delete(0, tk.END)
+    if username1 == user_admin:
+        if password1 == user_password:
+            login_success()
+        else:
+            wrong_password()
+    else:
+        user_not_found()
+def login_success():
+    global login_success_screen
+    login_success_screen = tk.Toplevel(login_screen)
+    login_success_screen.title("Success")
+    login_success_screen.geometry("150x100")
+    tk.Label(login_success_screen, text="Login Success").pack()
+    tk.Button(login_success_screen, text="OK", command=delete_login_success).pack()
+ 
+# Designing popup for login invalid password
+ 
+def wrong_password():
+    global password_not_recog_screen
+    password_not_recog_screen = tk.Toplevel(login_screen)
+    password_not_recog_screen.title("Success")
+    password_not_recog_screen.geometry("150x100")
+    tk.Label(password_not_recog_screen, text="Invalid Password ").pack()
+    tk.Button(password_not_recog_screen, text="OK", command=delete_wrong_password).pack()
+ 
+# Designing popup for user not found
+ 
+def user_not_found():
+    global user_not_found_screen
+    user_not_found_screen = tk.Toplevel(login_screen)
+    user_not_found_screen.title("Success")
+    user_not_found_screen.geometry("150x100")
+    tk.Label(user_not_found_screen, text="User Not Found").pack()
+    tk.Button(user_not_found_screen, text="OK", command=delete_user_not_found_screen).pack()
+ 
+# Deleting popups
+ 
+def delete_login_success():
+    login_success_screen.destroy()
+ 
+ 
+def delete_wrong_password():
+    password_not_recog_screen.destroy()
+ 
+ 
+def delete_user_not_found_screen():
+    user_not_found_screen.destroy()
+
+tk.Button(master=frame_toolbar,text="Login", height="2", width="30", command=login).pack() 
+tk.Label(text="").pack() 
+
+#bg does'nt work for mac, I use highlightbackgroun instead
+button = tk.Button(text = "West" )
+button.place(x = 100, y = 55)
 west = Building("West", button)
 west.people = 40
 west.auto_color()
@@ -253,9 +337,9 @@ allbuilding = [west, walker, sage, troy, richetts, wrestling, quad,
                empac, j_rowl, cogswell, jec, low, union, Mueller, cbis,
                ballroom, sage_dining]
 
-button = tk.Button(frame_toolbar, text="UPDATE")
-button.place(x=0, y=60)
-button.configure(command=lambda: updateData(allbuilding))
+button = tk.Button(master=frame_toolbar, text="UPDATE", height="2", width="30", command=lambda: updateData(allbuilding)).pack()
+# button.place(x=0, y=60)
+# button.configure(command=lambda: updateData(allbuilding))
 
 def live(allbuilding):
     while 1:

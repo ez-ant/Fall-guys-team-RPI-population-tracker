@@ -48,18 +48,22 @@ class Building:
 
     def change_color(self, color):
         self.button.configure(highlightbackground = color)
+        self.button.configure(bg = color)
         self.color = color
 
     def auto_color(self):
         self.ratio = float(self.people)/float(self.capacity)
         if self.ratio <= 0.1:
             self.button.configure(highlightbackground = "green")
+            self.button.configure(bg = "green")
             self.color = "green"
         elif self.ratio > 0.1 and self.ratio <= 0.3:
             self.button.configure(highlightbackground = "yellow")
+            self.button.configure(bg = "yellow")
             self.color = "yellow"
         else:
             self.button.configure(highlightbackground = "red")
+            self.button.configure(bg = "red")
             self.color = "red"
 
     def add_button(self, button):

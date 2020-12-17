@@ -408,7 +408,7 @@ def overall(all):
         current += b.people
         cap += b.capacity
     r = round(current/cap,3)
-    tk.messagebox.showinfo("Overall", "Currently the total amount of people on campus divide RPI people capacity\n\n"+str(r))
+    tk.messagebox.showinfo("Overall", "Currently the total amount of people on campus divide RPI people capacity:\n\n"+str(r))
 
 
 if __name__ == "__main__":

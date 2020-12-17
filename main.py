@@ -35,6 +35,8 @@ image = image.resize((820, 700), Image.ANTIALIAS)
 img = ImageTk.PhotoImage(image)
 user_admin = "a"
 user_password = "a"
+global access
+access = "0" # 0 : user, 1 : admin
 
 # The Label widget is a standard Tkinter widget used to display a text or image on the screen.
 background_picture = tk.Label(frame_picture, image=img)
@@ -147,13 +149,14 @@ def login_verify():
     else:
         user_not_found()
 def login_success():
+    access = "1"
+    print(access)
     global login_success_screen
     login_success_screen = tk.Toplevel(login_screen)
     login_success_screen.title("Success")
     login_success_screen.geometry("150x100")
     tk.Label(login_success_screen, text="Login Success").pack()
     tk.Button(login_success_screen, text="OK", command=delete_login_success).pack()
- 
 # Designing popup for login invalid password
  
 def wrong_password():
@@ -343,7 +346,7 @@ allbuilding = [west, walker, sage, troy, richetts, wrestling, quad,
 allbuilding_name = [i.name for i in allbuilding]
 def update_data():
     window = tk.Tk() 
-    window.geometry('350x250') 
+    window.geometry('350x300') 
     # Label 
     ttk.Label(window, text = "Select the Building :",  
             font = ("Times New Roman", 10)).grid(column = 0,  
@@ -367,13 +370,22 @@ def update_data():
             font = ("Times New Roman", 10)).grid(column = 0,  
             row = 16, padx = 10, pady = 25) 
     username_login_entry = tk.Entry(window, textvariable=num).grid(column = 1, row = 16)
-    tk.Button(master=window, text="Set", command=update_number).grid(column = 2, row = 16)
+    tk.Button(master=window, text="Set", height="2", width="30", command=update_number).grid(column = 1, row = 17)
     window.mainloop() 
 
 def update_number():
+    print(access)
+    if access == "0":
+        tk.messagebox.showinfo("No access")
+        return
     for building in allbuilding:
         if building.name == name:
-            building.people = int(num)
+            try: 
+                int(s)
+                building.people = int(num)
+            except ValueError:
+                tk.messagebox.showinfo("Please enter integer")
+            
 
 
 button = tk.Button(master=frame_toolbar, text="UPDATE", height="2", width="30", command=lambda: updateData(allbuilding)).pack()

@@ -1,6 +1,5 @@
 import random
 
-import connect_database
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
@@ -394,11 +393,23 @@ tk.Label(text="").pack()
 # button.place(x=0, y=60)
 # button.configure(command=lambda: updateData(allbuilding))
 
+button = tk.Button(frame_toolbar, text="Overall",  height="2", width="30", command=lambda: overall(allbuilding)).pack()
+
 def live(allbuilding):
     while 1:
         updateData(allbuilding)
         time.sleep(200)
         updateData(allbuilding)
+
+def overall(all):
+    current = 0
+    cap = 0
+    for b in all:
+        current += b.people
+        cap += b.capacity
+    r = round(current/cap,3)
+    tk.messagebox.showinfo("Overall", "Currently the total amount of people on campus divide RPI people capacity\n\n"+str(r))
+
 
 if __name__ == "__main__":
     # restrict the user to resize window

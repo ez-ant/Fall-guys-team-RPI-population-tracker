@@ -1,6 +1,5 @@
 import random
 
-import connect_database
 import tkinter as tk
 from tkinter import messagebox
 from PIL import ImageTk, Image
@@ -341,11 +340,20 @@ button = tk.Button(master=frame_toolbar, text="UPDATE", height="2", width="30", 
 # button.place(x=0, y=60)
 # button.configure(command=lambda: updateData(allbuilding))
 
+button = tk.Button(master=frame_toolbar, text="SAFEST", height="2", width="30", command=lambda: safest(allbuilding)).pack()
+
 def live(allbuilding):
     while 1:
         updateData(allbuilding)
         time.sleep(200)
         updateData(allbuilding)
+
+def safest(all):
+    safe = all[0]
+    for b in all:
+        if b.ratio < safe.ratio:
+            safe = b
+    tk.messagebox.showinfo("Safest Building", "The building that currently has the least population density:\n\n"+safe.name)
 
 if __name__ == "__main__":
     # restrict the user to resize window

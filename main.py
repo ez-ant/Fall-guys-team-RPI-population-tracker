@@ -4,6 +4,8 @@ import connect_database
 import tkinter as tk
 from tkinter import messagebox
 from PIL import ImageTk, Image
+import threading
+import time
 
 # set window
 window = tk.Tk()
@@ -85,8 +87,6 @@ def showdata(building):
 
 def updateData(all):
     for building in all:
-        original = building.people
-        building.people = random.randint(max(0, original-10), min(building.capacity, original+10))
         building.auto_color()
 
 
@@ -257,7 +257,16 @@ button = tk.Button(frame_toolbar, text="UPDATE")
 button.place(x=0, y=60)
 button.configure(command=lambda: updateData(allbuilding))
 
+def live(allbuilding):
+    while 1:
+        updateData(allbuilding)
+        time.sleep(200)
+        updateData(allbuilding)
+
 if __name__ == "__main__":
     # restrict the user to resize window
     window.resizable(width=False, height=False)
     window.mainloop()
+    t = threading.Thread(target=live(allbuilding))
+    t.start()
+    t.join()

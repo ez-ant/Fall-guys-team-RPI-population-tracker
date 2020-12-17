@@ -349,9 +349,12 @@ def update_data():
             font = ("Times New Roman", 10)).grid(column = 0,  
             row = 15, padx = 10, pady = 25) 
     
-    n = tk.StringVar() 
+    global num
+    global name
+    name = tk.StringVar() 
+    num = tk.StringVar() 
     building_choosen = ttk.Combobox(window, width = 27,  
-                                textvariable = n) 
+                                textvariable = name) 
     
     # Adding combobox drop down list 
     building_choosen['values'] = (allbuilding_name) 
@@ -359,8 +362,19 @@ def update_data():
     building_choosen.grid(column = 1, row = 15) 
     
     # Shows february as a default value 
-    building_choosen.current(1)  
+    building_choosen.current(1) 
+    ttk.Label(window, text = "Input the number :",  
+            font = ("Times New Roman", 10)).grid(column = 0,  
+            row = 16, padx = 10, pady = 25) 
+    username_login_entry = tk.Entry(window, textvariable=num).grid(column = 1, row = 16)
+    tk.Button(master=window, text="Set", command=update_number).grid(column = 2, row = 16)
     window.mainloop() 
+
+def update_number():
+    for building in allbuilding:
+        if building.name == name:
+            building.people = int(num)
+
 
 button = tk.Button(master=frame_toolbar, text="UPDATE", height="2", width="30", command=lambda: updateData(allbuilding)).pack()
 tk.Button(master=frame_toolbar,text="Update Data\n(Admin Only)", height="2", width="30", command=update_data).pack() 

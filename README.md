@@ -7,6 +7,4 @@ It is established for the purpose of avoiding unnecessary contact risks for stud
 
 To Run this project, users need to install PIL as well as Python 3
 
-Administrator Log in (for test):
-    Username: a
-    Password: a
+Attention: Mac OS users may need to change the auto_color funtion in Main.py to show the corresponding colors. 

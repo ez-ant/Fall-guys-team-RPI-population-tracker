@@ -37,14 +37,35 @@ background_picture = tk.Label(frame_picture, image = img)
 background_picture.place(x=0, y=0, relwidth=1, relheight=1)
 
 class Building:
-    def __init__(self, name, button):
+    def __init__(self, name, button, people = 20, capacity = 100, ratio = 0.2):
         self.name = name
+        self.people = people
         self.button = button
-        self.button.configure(highlightbackground = "yellow")
+        self.capacity = capacity
+        self.ratio = ratio
+        self.auto_color()
 
     def change_color(self, color):
         self.button.configure(highlightbackground = color)
+        self.color = color
+
+    def auto_color(self):
+        if self.ratio <= 0.1:
+            self.button.configure(highlightbackground = "green")
+            self.color = "green"
+        elif self.ratio > 0.1 and self.ratio <= 0.3:
+            self.button.configure(highlightbackground = "yellow")
+            self.color = "yellow"
+        else:
+            self.button.configure(highlightbackground = "red")
+            self.color = "red"
+
+    def add_button(self, button):
+        self.button = button
         
+def showdata(building):
+    tk.messagebox.showinfo( "Data Report", "Building: "+ building.name+"\n\nEmergency: " + building.color + "\nPeople in building: " + str(building.people) + "\nCapacity:" + str(building.capacity))
+
 def showdata1(name):
     tk.messagebox.showinfo( "Data Report", "Building: "+str(name)+"\n\nEmergency: red\nPeople in building: 50\nCapacity:100")
 
@@ -55,10 +76,10 @@ def showdata3(name):
     tk.messagebox.showinfo( "Data Report", "Building: "+str(name)+"\n\nEmergency: yellow\nPeople in building: 35\nCapacity:200")
 
 #bg does'nt work for mac, I use highlightbackgroun instead
-button = tk.Button(text = "West", command = lambda: showdata1("West") )
+button = tk.Button(text = "West" )
 button.place(x = 100, y = 55)
 west = Building("West", button)
-west.button.configure(highlightbackground = "red")
+button.configure(command = lambda: showdata(west) )
 
 button = tk.Button(text = "Walker")
 button.place(x = 155, y = 167)

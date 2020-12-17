@@ -8,6 +8,7 @@ from PIL import ImageTk, Image
 import threading
 import time
 
+
 # set window
 window = tk.Tk()
 window.geometry("1000x700")
@@ -35,8 +36,7 @@ image = image.resize((820, 700), Image.ANTIALIAS)
 img = ImageTk.PhotoImage(image)
 user_admin = "a"
 user_password = "a"
-global access
-access = "0" # 0 : user, 1 : admin
+
 
 # The Label widget is a standard Tkinter widget used to display a text or image on the screen.
 background_picture = tk.Label(frame_picture, image=img)
@@ -110,7 +110,7 @@ def showdata3(name):
                            "Building: " + str(name) + "\n\nEmergency: yellow\nPeople in building: 35\nCapacity:200")
 
 
-def login():
+def login(access):
     global login_screen
     login_screen = tk.Toplevel(frame_picture)
     login_screen.title("Login")
@@ -134,21 +134,21 @@ def login():
     password_login_entry = tk.Entry(login_screen, textvariable=password_verify, show= '*')
     password_login_entry.pack()
     tk.Label(login_screen, text="").pack()
-    tk.Button(login_screen, text="Login", width=10, height=1, command=login_verify).pack()
+    tk.Button(login_screen, text="Login", width=10, height=1, command=lambda: login_verify(access)).pack()
 
-def login_verify():
+def login_verify(access):
     username1 = username_verify.get()
     password1 = password_verify.get()
     username_login_entry.delete(0, tk.END)
     password_login_entry.delete(0, tk.END)
     if username1 == user_admin:
         if password1 == user_password:
-            login_success()
+            login_success(access)
         else:
-            wrong_password()
+            wrong_password(access)
     else:
-        user_not_found()
-def login_success():
+        user_not_found(access)
+def login_success(access):
     access = "1"
     print(access)
     global login_success_screen
@@ -159,7 +159,8 @@ def login_success():
     tk.Button(login_success_screen, text="OK", command=delete_login_success).pack()
 # Designing popup for login invalid password
  
-def wrong_password():
+def wrong_password(access):
+    access = "0"
     global password_not_recog_screen
     password_not_recog_screen = tk.Toplevel(login_screen)
     password_not_recog_screen.title("Success")
@@ -169,7 +170,8 @@ def wrong_password():
  
 # Designing popup for user not found
  
-def user_not_found():
+def user_not_found(access):
+    access = "0"
     global user_not_found_screen
     user_not_found_screen = tk.Toplevel(login_screen)
     user_not_found_screen.title("Success")
@@ -190,9 +192,10 @@ def delete_wrong_password():
 def delete_user_not_found_screen():
     user_not_found_screen.destroy()
 
+access = "1" # 0 : user, 1 : admin
 
-
-tk.Button(master=frame_toolbar,text="Login", height="2", width="30", command=login).pack() 
+tk.Button(master=frame_toolbar,text="Login", height="2", width="30", command=lambda: login(access)).pack() 
+print(access)
 tk.Label(text="").pack() 
 
 
@@ -345,6 +348,7 @@ allbuilding = [west, walker, sage, troy, richetts, wrestling, quad,
                ballroom, sage_dining]
 allbuilding_name = [i.name for i in allbuilding]
 def update_data():
+    print(access)
     window = tk.Tk() 
     window.geometry('350x300') 
     # Label 
@@ -363,26 +367,29 @@ def update_data():
     building_choosen['values'] = (allbuilding_name) 
     
     building_choosen.grid(column = 1, row = 15) 
-    
+    print(name)
     # Shows february as a default value 
     building_choosen.current(1) 
     ttk.Label(window, text = "Input the number :",  
             font = ("Times New Roman", 10)).grid(column = 0,  
             row = 16, padx = 10, pady = 25) 
-    username_login_entry = tk.Entry(window, textvariable=num).grid(column = 1, row = 16)
-    tk.Button(master=window, text="Set", height="2", width="30", command=update_number).grid(column = 1, row = 17)
+    num_entry = tk.Entry(window, textvariable=num).grid(column = 1, row = 16)
+    tk.Button(master=window, text="Set", height="2", width="30", command=lambda:update_number(building_choosen, num)).grid(column = 1, row = 17)
     window.mainloop() 
 
-def update_number():
+def update_number(building_choosen, num):
+    name = building_choosen.get()
     print(access)
+    print(name)
     if access == "0":
         tk.messagebox.showinfo("No access")
         return
     for building in allbuilding:
         if building.name == name:
             try: 
-                int(s)
-                building.people = int(num)
+                print(num.get())
+                building.people = int(num.get())
+                print(building.people)
             except ValueError:
                 tk.messagebox.showinfo("Please enter integer")
             

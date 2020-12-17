@@ -37,12 +37,13 @@ background_picture = tk.Label(frame_picture, image = img)
 background_picture.place(x=0, y=0, relwidth=1, relheight=1)
 
 class Building:
-    def __init__(self, name, button, people = 20, capacity = 100, ratio = 0.2):
+    def __init__(self, name, button, people = 20, capacity = 100, ratio = 0.2, schedule = [0, 24]):
         self.name = name
         self.people = people
         self.button = button
         self.capacity = capacity
         self.ratio = ratio
+        self.schedule = schedule
         self.auto_color()
 
     def change_color(self, color):
@@ -63,9 +64,13 @@ class Building:
 
     def add_button(self, button):
         self.button = button
+
+    def change_schedule(self, open, close):
+        self.schedule = [open, close]
         
 def showdata(building):
-    tk.messagebox.showinfo( "Data Report", "Building: "+ building.name+"\n\nEmergency: " + building.color + "\nPeople in building: " + str(building.people) + "\nCapacity:" + str(building.capacity))
+    tk.messagebox.showinfo( "Data Report", "Building: "+ building.name+"\n\nEmergency: " + building.color + "\nPeople in building: " + str(building.people) + "\nCapacity:" + str(building.capacity)
+                        + "\n\nOpening time: "+ str(building.schedule[0])+":00 ~ "+str(building.schedule[1])+":00")
 
 def showdata1(name):
     tk.messagebox.showinfo( "Data Report", "Building: "+str(name)+"\n\nEmergency: red\nPeople in building: 50\nCapacity:100")
@@ -138,6 +143,7 @@ button.configure(command = lambda: showdata(ae) )
 button = tk.Button(text = "Greene")
 button.place(x = 310, y = 280)
 greene = Building("Greene", button)
+greene.change_schedule(8,17)
 button.configure(command = lambda: showdata(greene) )
 
 button = tk.Button(text = "Carnegie")
@@ -149,6 +155,7 @@ button = tk.Button(text = "Library")
 button.place(x = 160, y = 380)
 library = Building("Library", button)
 library.capacity = 300
+library.change_schedule(7,3)
 library.auto_color()
 button.configure(command = lambda: showdata(library) )
 
@@ -190,12 +197,14 @@ button = tk.Button(text = "UNION", command = lambda: showdata3("UNION") )
 button.place(x = 760, y = 300)
 union = Building("UNION", button)
 union.capacity = 200
+union.change_schedule(8,23)
 union.auto_color()
 button.configure(command = lambda: showdata(union) )
 
 button = tk.Button(text = "Mueller Center")
 button.place(x = 720, y = 500)
 Mueller = Building("Mueller Center", button)
+Mueller.change_schedule(10,22)
 button.configure(command = lambda: showdata(Mueller) )
 
 button = tk.Button(text = "Center for Biotechnology")
